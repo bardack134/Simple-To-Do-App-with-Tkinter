@@ -18,8 +18,12 @@ user_data_list=[]
 
 enter_data=StringVar()
 
+#variable que determina la posicion de la tarea dentro de nuestro texto 'text_widget'
+position=0 
+
 #funcion que se ejecutara cuando el usario oprima el boton submit
 def submit():
+    global position
     #usando el metodo get obtenemos la informacion ingresada por el user
     enter_data_get=enter_data.get()
     
@@ -29,12 +33,13 @@ def submit():
     #imprimo en consola para saber si estamos　leyendo la informacion ingresada por el user correctamente
     print(user_data_list)
     
-    #reccoro con un ciclo for la lista de tareas del user 'user_data_list'
-    for i in user_data_list:
-        
-        #con el metodo insert, agrego la informacion escrita por el usuario al text_widget
-        text_widget.insert(INSERT, f"{i}\n")
-
+    #con el metodo insert, agrego la informacion escrita por el usuario al text_widget
+    text_widget.insert(INSERT, f"[{position}]{enter_data_get}\n")
+    
+    #aumento la posicion en 1
+    position +=1
+    
+                         
 #Entry widget que el usuario usara para ingresar la tarea
 data_entry_widget=Entry(window, textvariable=enter_data, width=30, font=("Helvetica", "14") )
 data_entry_widget.pack( pady=7, padx=7)
