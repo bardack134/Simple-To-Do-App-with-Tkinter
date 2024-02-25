@@ -39,6 +39,8 @@ def submit():
     #aumento la posicion en 1
     position +=1
     
+    # Para borrar el contenido del Entry
+    data_entry_widget.delete(0, END)
                          
 #Entry widget que el usuario usara para ingresar la tarea
 data_entry_widget=Entry(window, textvariable=enter_data, width=30, font=("Helvetica", "14") )
@@ -54,20 +56,29 @@ submit_button.pack(pady=7)
 text_widget=Text(window, height=10, width=30, font=("Helvetica", "17"))
 text_widget.pack(pady=7, padx=7)
 
-# text_widget.insert(INSERT, "esto es una prueba")
+
 
 #label dindicando al usuario que ingrese el numero de la tarea a eliminar
 elimanate_task_label=Label(window, text='Enter the task number to delete', bg="black", fg="white", font=('calibre', 14, 'bold'))
 elimanate_task_label.pack(side=TOP)
 
+#funcion que borra una tarea de la lista de tareas
+delete_data=StringVar()
+
+def deleteTask():
+    global user_data_list
+    delete_data_get=delete_data.get()
+    
+    text_widget.delete(delete_data_get)
+
 
 #Entry widget que el usuario usara para eliminar una tarea
-eliminate=Entry(window, width=5, font=("Helvetica", "15") )
+eliminate=Entry(window, textvariable=delete_data, width=5, font=("Helvetica", "15") )
 eliminate.pack( pady=7,)
 
 
 #delete Botton
-delete_button=Button(window, text='Delete', )
+delete_button=Button(window, command=deleteTask, text='Delete', )
 delete_button.pack(pady=7)
 
 
